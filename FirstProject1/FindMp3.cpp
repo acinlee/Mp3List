@@ -10,9 +10,9 @@ HINSTANCE g_hInst;
 LPCTSTR lpszClass = TEXT("Mp3List");
 
 //Æ®¸®ºä
-//HWND hTreeDirectory;
+HWND hTreeDirectory;
 //¸®½ºÆ®ºä
-//HWND hListViewDirectory;
+HWND hListViewDirectory;
 
 //Æú´õ µî·Ï ¹öÆ°
 HWND hFolderUploadBtn;
@@ -55,7 +55,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 
 	return (int)Message.wParam;
 }
-/*
+
 void FindFileRecursive(TCHAR* path)
 {
 	HANDLE hSrch;
@@ -147,25 +147,25 @@ void DirTreeView(TCHAR* path)
 	}
 	FindClose(hSrch);
 }
-*/
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
-	/*LVCOLUMN COL;
-	LVITEM LI;*/
+	LVCOLUMN COL;
+	LVITEM LI;
 	TCHAR RootDir[MAX_PATH];
 	TCHAR Path[MAX_PATH];
-	//int i;
+	int i;
 	switch (iMessage)
 	{
 	case WM_CREATE:
-		//InitCommonControls();
-		//hListViewDirectory = CreateWindow(WC_LISTVIEW, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | LVS_REPORT, 10, 10, 500, 200, hWnd, NULL, g_hInst, NULL);
-		//hTreeDirectory = CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 250, 100, 400, hWnd, NULL, g_hInst, NULL);
+		InitCommonControls();
+		hListViewDirectory = CreateWindow(WC_LISTVIEW, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | LVS_REPORT, 210, 100, 620, 200, hWnd, NULL, g_hInst, NULL);
+		hTreeDirectory = CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 100, 200, 200, hWnd, NULL, g_hInst, NULL);
 		hFolderUploadBtn = CreateWindow(TEXT("button"), "Æú´õµî·Ï", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 20, 20, 100, 25, hWnd, (HMENU)ID_hFolderUpload_Btn, g_hInst, NULL);
 		//Æ®¸®ºä
 
 		// ¸®½ºÆ®ºä
-		/*COL.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+		COL.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 		COL.fmt = LVCFMT_LEFT;
 		COL.cx = 150;
 		COL.pszText = (LPSTR)"°î¸í";
@@ -190,7 +190,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		COL.cx = 150;
 		COL.pszText = (LPSTR)"¾Ù¹ü";
 		COL.iSubItem = 4;
-		SendMessage(hListViewDirectory, LVM_INSERTCOLUMN, 4, (LPARAM)&COL);*/
+		SendMessage(hListViewDirectory, LVM_INSERTCOLUMN, 4, (LPARAM)&COL);
 		return 0;
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
