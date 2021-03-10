@@ -1,8 +1,4 @@
 ﻿  FindMp3.cpp
-C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FindMp3.cpp(152,6): warning C4101: 'hdc' :참조되지 않은 지역 변수입니다.
-C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FindMp3.cpp(156,9): warning C4101: 'LI' :참조되지 않은 지역 변수입니다.
-C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FindMp3.cpp(159,17): warning C4101: 'TI' :참조되지 않은 지역 변수입니다.
-C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FindMp3.cpp(160,12): warning C4101: 'HTREE' :참조되지 않은 지역 변수입니다.
   MainWindow.cpp
   코드를 생성하고 있습니다...
   FirstProject1.vcxproj -> C:\Users\ldj\source\repos\FirstProject1\Debug\FirstProject1.exe

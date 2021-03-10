@@ -92,7 +92,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 }*/
 
 //디렉토리 트리뷰
-void DirTreeView_Insert(TCHAR* path, HTREEITEM Parent_TREE)
+/*void DirTreeView_Insert(TCHAR* path, HTREEITEM Parent_TREE)
 {
 	HANDLE hSrch;
 	WIN32_FIND_DATA wfd;
@@ -145,9 +145,9 @@ void DirTreeView_Insert(TCHAR* path, HTREEITEM Parent_TREE)
 
 	}
 	FindClose(hSrch);
-}
+}*/
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+/*LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 
@@ -228,7 +228,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 				HTREE = TreeView_InsertItem(hTreeDirectory, &TI);*/
 
 				//root 하위 디렉토리 트리뷰
-				DirTreeView_Insert(RootDir, (HTREEITEM)0);
+				/*DirTreeView_Insert(RootDir, (HTREEITEM)0);
 			}
 		}
 		return FALSE;
@@ -238,9 +238,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	}
 
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
-}
+}*/
 
-int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
+/*int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
 {
 	switch (uMsg) {
 	case BFFM_INITIALIZED:
@@ -279,6 +279,6 @@ BOOL BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFol
 	pMalloc->Free(pidl);
 	pMalloc->Release();
 	return TRUE;
-}
+}*/
 
 
