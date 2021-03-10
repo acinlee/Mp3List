@@ -34,7 +34,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 {
 	//main_window.Create();
 	MainWindow main(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
-	main.MainWindowCreate();
+	main.Create();
 
 	while (GetMessage(&main.m_Message, NULL, 0, 0))
 	{

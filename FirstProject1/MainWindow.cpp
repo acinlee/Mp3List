@@ -12,7 +12,7 @@ MainWindow::MainWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdL
 	m_WndClass = { 0, };
 }
 
-void MainWindow::MainWindowCreate()
+void MainWindow::Create()
 {
 	m_WndClass.cbClsExtra = 0;
 	m_WndClass.cbWndExtra = 0;
@@ -30,6 +30,7 @@ void MainWindow::MainWindowCreate()
 	ShowWindow(m_Main_Window, m_nCmdShow);
 }
 
-MainWindow::~MainWindow()
+LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
+
 }
