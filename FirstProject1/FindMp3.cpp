@@ -17,12 +17,16 @@ HWND hListViewDirectory;
 //폴더 등록 버튼
 HWND hFolderUploadBtn;
 
+//선택한 폴더 경로
+HWND hComboBoxPath;
+
 enum
 {
 	ID_hListView_File = 100,
 	ID_hTreeView_Folder = 200,
 	ID_hFile_Route_Combobox = 300,
-	ID_hFolderUpload_Btn = 401
+	ID_hFolderUpload_Btn = 401,
+
 };
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
@@ -56,7 +60,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 	return (int)Message.wParam;
 }
 
-void FindFileRecursive(TCHAR* path)
+/*void FindFileRecursive(TCHAR* path)
 {
 	HANDLE hSrch;
 	WIN32_FIND_DATA wfd;
@@ -100,21 +104,24 @@ void FindFileRecursive(TCHAR* path)
 		bResult = FindNextFile(hSrch, &wfd);
 	}
 	FindClose(hSrch);
-}
+}*/
 
-void DirTreeView(TCHAR* path)
+//디렉토리 트리뷰
+void DirTreeView_Insert(TCHAR* path, HTREEITEM Parent_TREE)
 {
 	HANDLE hSrch;
 	WIN32_FIND_DATA wfd;
 	BOOL bResult = TRUE;
-	TCHAR full_path[MAX_PATH]; //전체 경로
+	//TCHAR full_path[MAX_PATH]; //전체 경로
 	TCHAR drive[_MAX_DRIVE]; //드라이브명
 	TCHAR dir[_MAX_DIR]; //디렉토리 경로
 	TCHAR fname[_MAX_FNAME]; // 파일명
 	TCHAR ext[_MAX_EXT]; //확장자 명
 	TCHAR newpath[MAX_PATH];
 
+	//트리뷰
 	TVINSERTSTRUCT TI;
+	HTREEITEM HTREE;
 
 	hSrch = FindFirstFile(path, &wfd);
 	if (hSrch == INVALID_HANDLE_VALUE)
@@ -123,45 +130,65 @@ void DirTreeView(TCHAR* path)
 	}
 	_splitpath_s(path, drive, dir, fname, ext);
 
+	TI.hParent = Parent_TREE;
+	TI.hInsertAfter = TVI_LAST;
+	TI.item.mask = TVIF_TEXT;
+	TI.item.pszText = dir;
+	HTREE = TreeView_InsertItem(hTreeDirectory, &TI);
+
 	while (bResult)
 	{
 		//디렉토리인지 검사
-		if (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+		if (wfd.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY)
 		{
-
 			if (lstrcmp(wfd.cFileName, ".") && lstrcmp(wfd.cFileName, ".."))
 			{
 				wsprintf(newpath, "%s%s%s\\*.*", drive, dir, wfd.cFileName);
-				FindFileRecursive(newpath);
+				DirTreeView_Insert(newpath, HTREE);
 			}
 			else
 			{
-				//여기서 파일 split해서 sendmessage to listview
-				wsprintf(fname, "%s%s%s", drive, dir, wfd.cFileName);
-
-				SendMessage(hListViewDirectory, LVM_SETITEM, 0, (LPARAM)fname);
-
+				wsprintf(newpath, "%s", dir);
+				TI.hParent = HTREE;
+				TI.hInsertAfter = TVI_LAST;
+				TI.item.mask = TVIF_TEXT;
+				TI.item.pszText = newpath;
+				HTREE = TreeView_InsertItem(hTreeDirectory, &TI);
 			}
 		}
 		bResult = FindNextFile(hSrch, &wfd);
+
 	}
 	FindClose(hSrch);
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
+	HDC hdc;
+
+	//리스트뷰
 	LVCOLUMN COL;
 	LVITEM LI;
+
+	//트리뷰
+	TVINSERTSTRUCT TI;
+	HTREEITEM HTREE;
+
+	//사용자 선택 폴더
 	TCHAR RootDir[MAX_PATH];
-	TCHAR Path[MAX_PATH];
-	int i;
+	//TCHAR Path[MAX_PATH];
+
+	//int i;
+
 	switch (iMessage)
 	{
 	case WM_CREATE:
 		InitCommonControls();
-		hListViewDirectory = CreateWindow(WC_LISTVIEW, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | LVS_REPORT, 210, 100, 620, 200, hWnd, NULL, g_hInst, NULL);
-		hTreeDirectory = CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 100, 200, 200, hWnd, NULL, g_hInst, NULL);
-		hFolderUploadBtn = CreateWindow(TEXT("button"), "폴더등록", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 20, 20, 100, 25, hWnd, (HMENU)ID_hFolderUpload_Btn, g_hInst, NULL);
+		hListViewDirectory = CreateWindow(WC_LISTVIEW, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | LVS_REPORT, 410, 100, 620, 200, hWnd, NULL, g_hInst, NULL);
+		hTreeDirectory = CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 100, 400, 200, hWnd, NULL, g_hInst, NULL);
+		hFolderUploadBtn = CreateWindow(TEXT("button"), "폴더등록", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 440, 20, 100, 25, hWnd, (HMENU)ID_hFolderUpload_Btn, g_hInst, NULL);
+		hComboBoxPath = CreateWindow(TEXT("edit"), NULL, WS_CHILD | WS_VISIBLE | WS_BORDER, 20, 20, 400, 25, hWnd, (HMENU)ID_hFile_Route_Combobox, g_hInst, NULL);
+
 		//트리뷰
 
 		// 리스트뷰
@@ -196,10 +223,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		switch (LOWORD(wParam))
 		{
 		case ID_hFolderUpload_Btn:
-			GetWindowsDirectory(RootDir, MAX_PATH);
-			BrowseFolder(hWnd, NULL, NULL, RootDir);
-			break;
+			//GetWindowsDirectory(RootDir, MAX_PATH);
+			if (BrowseFolder(hWnd, NULL, NULL, RootDir) == TRUE)
+			{
+				SetWindowText(hComboBoxPath, RootDir);
+				//사용자가 선택한 폴더 root로 만들기
+
+				/*TI.hParent = TVI_ROOT;
+				TI.hInsertAfter = TVI_LAST;
+				TI.item.mask = TVIF_TEXT;
+				TI.item.pszText = RootDir;
+				HTREE = TreeView_InsertItem(hTreeDirectory, &TI);*/
+
+				//root 하위 디렉토리 트리뷰
+				DirTreeView_Insert(RootDir, (HTREEITEM)0);
+			}
 		}
+		return FALSE;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
