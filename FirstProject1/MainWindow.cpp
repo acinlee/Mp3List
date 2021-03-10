@@ -10,6 +10,11 @@ MainWindow::MainWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdL
 	m_lpszClass = TEXT("default");
 	m_Message = { 0, };
 	m_WndClass = { 0, };
+
+	m_hWnd = NULL;
+	m_iMessage = 0;
+	m_wParam = NULL;
+	m_lParam = NULL;
 }
 
 void MainWindow::Create()

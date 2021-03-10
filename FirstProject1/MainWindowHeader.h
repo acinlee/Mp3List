@@ -1,5 +1,5 @@
-#ifndef WinMainHeader
-#define WinMainHeader
+#ifndef MainWindowHeader
+#define MainWindowHeader
 #include <windows.h>
 class MainWindow
 {
