@@ -1,3 +1,4 @@
+#include "MainWindowHeader.h"
 #include <windows.h>
 #include <CommCtrl.h>
 #include <SHLOBJ.H>
@@ -31,33 +32,17 @@ enum
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 {
-	HWND hWnd;
-	MSG Message;
-	WNDCLASS WndClass;
-	g_hInst = hInstance;
+	//main_window.Create();
+	MainWindow main(hInstance, hPrevInstance, lpCmdLine, nCmdShow);
+	main.MainWindowCreate();
 
-	WndClass.cbClsExtra = 0;
-	WndClass.cbWndExtra = 0;
-	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	WndClass.hCursor = LoadCursor(NULL, IDC_HELP);
-	WndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	WndClass.hInstance = hInstance;
-	WndClass.lpfnWndProc = WndProc;
-	WndClass.lpszClassName = lpszClass;
-	WndClass.lpszMenuName = NULL;
-	WndClass.style = CS_HREDRAW | CS_VREDRAW;//넓이, 높이 변경 시 윈도우 다시 그림
-	RegisterClass(&WndClass);
-
-	hWnd = CreateWindow(lpszClass, lpszClass, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, (HMENU)NULL, hInstance, NULL);
-	ShowWindow(hWnd, nCmdShow);
-
-	while (GetMessage(&Message, NULL, 0, 0))
+	while (GetMessage(&main.m_Message, NULL, 0, 0))
 	{
-		TranslateMessage(&Message);
-		DispatchMessage(&Message);
+		TranslateMessage(&main.m_Message);
+		DispatchMessage(&main.m_Message);
 	}
 
-	return (int)Message.wParam;
+	return (int)main.m_Message.wParam;
 }
 
 /*void FindFileRecursive(TCHAR* path)
@@ -135,7 +120,7 @@ void DirTreeView_Insert(TCHAR* path, HTREEITEM Parent_TREE)
 	TI.item.mask = TVIF_TEXT;
 	TI.item.pszText = dir;
 	HTREE = TreeView_InsertItem(hTreeDirectory, &TI);
-
+	
 	while (bResult)
 	{
 		//디렉토리인지 검사
@@ -183,6 +168,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	switch (iMessage)
 	{
 	case WM_CREATE:
+		//OnCreate();
 		InitCommonControls();
 		hListViewDirectory = CreateWindow(WC_LISTVIEW, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | LVS_REPORT, 410, 100, 620, 200, hWnd, NULL, g_hInst, NULL);
 		hTreeDirectory = CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 100, 400, 200, hWnd, NULL, g_hInst, NULL);
@@ -195,7 +181,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		COL.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 		COL.fmt = LVCFMT_LEFT;
 		COL.cx = 150;
-		COL.pszText = (LPSTR)"곡명";
+		//static_cast<>;
+		//reinterpret_cast<>;
+		//const_cast<>;
+		//dynamic_cast<>;
+		//float - > dpuble;
+		//long -> int
+		COL.pszText = const_cast<char*>("곡명");
 		COL.iSubItem = 0;
 		SendMessage(hListViewDirectory, LVM_INSERTCOLUMN, 0, (LPARAM)&COL);
 
@@ -264,7 +256,7 @@ BOOL BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFol
 {
 	LPMALLOC pMalloc;
 	LPITEMIDLIST pidl;
-	BROWSEINFO bi;
+	BROWSEINFO bi = { 0, };
 
 	bi.hwndOwner = hParent;
 	bi.pidlRoot = NULL;
