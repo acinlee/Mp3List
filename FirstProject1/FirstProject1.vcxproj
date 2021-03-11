@@ -21,9 +21,10 @@
   <ItemGroup>
     <ClCompile Include="FindMp3.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="MainWindowHeader.cpp" />
+    <ClCompile Include="Main_FolderList_TreeView.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FolderList_TreeView.h" />
     <ClInclude Include="MainWindowHeader.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
