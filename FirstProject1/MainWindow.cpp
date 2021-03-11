@@ -1,3 +1,4 @@
+#pragma once
 #include "MainWindowHeader.h"
 #include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
@@ -40,14 +41,17 @@ void MainWindow::Create()
 LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 	InitCommonControls();
-	//¹®Á¦
 	TreeView_FolderList_Instance.Create(hWnd, m_hInstance);
 	TreeView_FolderList_Instance.InsertFolderList();
+	FolderRegisterBtn_Instance.Create(hWnd, m_hInstance);
+	FilePathEdit_Instance.Create(hWnd, m_hInstance);
 	return 0;
 }
 
+
 LRESULT MainWindow::OnDestroy(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
+	PostQuitMessage(0);
 	return 0;
 }
 
@@ -62,7 +66,7 @@ LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LP
 		main->OnCreate(hWnd, wParam, lParam);
 		return 0;
 	case WM_DESTROY:
-		PostQuitMessage(0);
+		main->OnDestroy(hWnd, wParam, lParam);
 		return 0;
 	}
 

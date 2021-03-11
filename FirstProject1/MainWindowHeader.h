@@ -1,7 +1,10 @@
 #ifndef MainWindowHeader
 #define MainWindowHeader
+#pragma once
 #include <windows.h>
 #include "FolderList_TreeView.h"
+#include "FolderRegisterBtn.h"
+#include "FilePathEdit.h"
 class MainWindow
 {
 public:
@@ -22,6 +25,8 @@ public:
 
 public:
 	TreeView_FolderList TreeView_FolderList_Instance;
+	FolderRegisterBtn FolderRegisterBtn_Instance;
+	FilePathEdit FilePathEdit_Instance;
 
 public:
 	MainWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdSow);

@@ -19,11 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FilePathEditMain.cpp" />
     <ClCompile Include="FindMp3.cpp" />
+    <ClCompile Include="FolderRegisterBtnMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="FolderRegisterBtn.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Main_FolderList_TreeView.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FilePathEdit.h" />
     <ClInclude Include="FolderList_TreeView.h" />
     <ClInclude Include="MainWindowHeader.h" />
   </ItemGroup>
