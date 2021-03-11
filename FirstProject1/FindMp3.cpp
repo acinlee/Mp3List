@@ -7,28 +7,6 @@
 BOOL BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFolder);
 int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
-HINSTANCE g_hInst;
-LPCTSTR lpszClass = TEXT("Mp3List");
-
-//트리뷰
-HWND hTreeDirectory;
-//리스트뷰
-HWND hListViewDirectory;
-
-//폴더 등록 버튼
-HWND hFolderUploadBtn;
-
-//선택한 폴더 경로
-HWND hComboBoxPath;
-
-enum
-{
-	ID_hListView_File = 100,
-	ID_hTreeView_Folder = 200,
-	ID_hFile_Route_Combobox = 300,
-	ID_hFolderUpload_Btn = 401,
-
-};
 
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, INT nCmdShow)
 {

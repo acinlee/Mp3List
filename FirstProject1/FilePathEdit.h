@@ -8,7 +8,10 @@ public:
 	HWND m_ParentWnd;
 	HWND m_FilePathEdit;
 	HINSTANCE m_hInstance;
-	int m_ID_FilePath_Edit;
+	TCHAR UserSelectFolder[MAX_PATH];
+
+public:
+	static const int m_ID_FilePath_Edit = 200;
 
 public:
 	FilePathEdit();

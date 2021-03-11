@@ -6,7 +6,6 @@ FilePathEdit::FilePathEdit()
 	m_ParentWnd = NULL;
 	m_FilePathEdit = NULL;
 	m_hInstance = NULL;
-	m_ID_FilePath_Edit = 200;
 }
 
 HWND FilePathEdit::Create(HWND hWnd, HINSTANCE hInstance)
