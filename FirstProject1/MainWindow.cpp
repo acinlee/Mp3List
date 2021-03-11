@@ -45,6 +45,7 @@ LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	TreeView_FolderList_Instance.InsertFolderList();
 	FolderRegisterBtn_Instance.Create(hWnd, m_hInstance);
 	FilePathEdit_Instance.Create(hWnd, m_hInstance);
+	FileListView_Instance.Create(hWnd, m_hInstance);
 	return 0;
 }
 
