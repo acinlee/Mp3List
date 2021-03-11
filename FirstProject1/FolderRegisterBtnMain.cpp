@@ -6,7 +6,6 @@ FolderRegisterBtn::FolderRegisterBtn()
 	m_ParentWnd = NULL;
 	m_FolderRegisterBtn = NULL;
 	m_hInstance = NULL;
-	m_ID_Btn = 100;
 }
 
 HWND FolderRegisterBtn::Create(HWND hWnd, HINSTANCE hInstance)

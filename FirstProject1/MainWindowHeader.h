@@ -1,11 +1,12 @@
 #ifndef MainWindowHeader
 #define MainWindowHeader
-#pragma once
 #include <windows.h>
+#include <SHLOBJ.H>
 #include "FolderList_TreeView.h"
 #include "FolderRegisterBtn.h"
 #include "FilePathEdit.h"
 #include "FileListView.h"
+
 class MainWindow
 {
 public:
@@ -41,7 +42,10 @@ public:
 	void Create();
 	LRESULT OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnDestroy(HWND hWnd, WPARAM wParam, LPARAM lParam);
-private:
+	LRESULT OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam);
+
+	static int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
+	BOOL BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFolder);
 };
 
 

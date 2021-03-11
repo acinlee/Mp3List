@@ -46,6 +46,7 @@ LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	FolderRegisterBtn_Instance.Create(hWnd, m_hInstance);
 	FilePathEdit_Instance.Create(hWnd, m_hInstance);
 	FileListView_Instance.Create(hWnd, m_hInstance);
+	FileListView_Instance.FileListInsert();
 	return 0;
 }
 
@@ -53,6 +54,19 @@ LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 LRESULT MainWindow::OnDestroy(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 	PostQuitMessage(0);
+	return 0;
+}
+
+LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
+{
+	switch(LOWORD(wParam))
+	{
+	case FolderRegisterBtn::m_ID_Btn:
+		if (BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.UserSelectFolder) == TRUE)
+		{
+			SetWindowText(FilePathEdit_Instance.m_FilePathEdit, FilePathEdit_Instance.UserSelectFolder);
+		}
+	}
 	return 0;
 }
 
@@ -66,10 +80,54 @@ LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LP
 		main = (MainWindow*)(((LPCREATESTRUCT)lParam)->lpCreateParams);
 		main->OnCreate(hWnd, wParam, lParam);
 		return 0;
+	case WM_COMMAND:
+		main->OnCommand(hWnd, wParam, lParam);
+		return FALSE;
 	case WM_DESTROY:
 		main->OnDestroy(hWnd, wParam, lParam);
 		return 0;
 	}
 
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
+}
+
+int CALLBACK MainWindow::BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
+{
+	switch (uMsg) {
+	case BFFM_INITIALIZED:
+		if (lpData != NULL) {
+			SendMessage(hwnd, BFFM_SETSELECTION, TRUE, (LPARAM)lpData);
+		}
+		break;
+	}
+	return 0;
+}
+
+BOOL MainWindow::BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFolder)
+{
+	LPMALLOC pMalloc;
+	LPITEMIDLIST pidl;
+	BROWSEINFO bi = { 0, };
+
+	bi.hwndOwner = hParent;
+	bi.pidlRoot = NULL;
+	bi.pszDisplayName = NULL;
+	bi.lpszTitle = szTitle;
+	bi.ulFlags = 0;
+	bi.lpfn = BrowseCallbackProc;;
+	bi.lParam = (LPARAM)StartPath;
+
+	pidl = SHBrowseForFolder(&bi);
+
+	if (pidl == NULL) {
+		return FALSE;
+	}
+	SHGetPathFromIDList(pidl, szFolder);
+
+	if (SHGetMalloc(&pMalloc) != NOERROR) {
+		return FALSE;
+	}
+	pMalloc->Free(pidl);
+	pMalloc->Release();
+	return TRUE;
 }

@@ -8,10 +8,13 @@ public:
 	HWND m_ParentWnd;
 	HWND m_FolderRegisterBtn;
 	HINSTANCE m_hInstance;
-	int m_ID_Btn;
+
+public:
+	static const int m_ID_Btn = 100;
 
 public:
 	FolderRegisterBtn();
 	HWND Create(HWND hWnd, HINSTANCE hInstance);
+
 };
 #endif // !FolderRegisterBtn.h
