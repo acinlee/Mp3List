@@ -24,12 +24,24 @@
     <ClCompile Include="Main_FolderList_TreeView.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="FolderRegisterBtn.h">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FolderRegisterBtnMain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FilePathEditMain.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainWindowHeader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="FolderList_TreeView.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FilePathEdit.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

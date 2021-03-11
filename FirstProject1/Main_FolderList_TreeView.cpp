@@ -1,3 +1,4 @@
+#pragma once
 #include "FolderList_TreeView.h"
 
 TreeView_FolderList::TreeView_FolderList()
@@ -12,7 +13,8 @@ TreeView_FolderList::TreeView_FolderList()
 HWND TreeView_FolderList::Create(HWND hWnd, HINSTANCE hInstance)
 {
 	m_ParentWnd = hWnd;
-	return (m_hTreeFolerList=CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 100, 400, 200, hWnd, NULL, hInstance, NULL));
+	m_hInstance = hInstance;
+	return (m_hTreeFolerList=CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 100, 400, 200, hWnd, NULL, m_hInstance, NULL));
 }
 
 void TreeView_FolderList::InsertFolderList()
