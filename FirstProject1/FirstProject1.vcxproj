@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FileListViewMain.cpp" />
     <ClCompile Include="FilePathEditMain.cpp" />
     <ClCompile Include="FindMp3.cpp" />
     <ClCompile Include="FolderRegisterBtnMain.cpp">
@@ -31,6 +32,7 @@
     <ClCompile Include="Main_FolderList_TreeView.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileListView.h" />
     <ClInclude Include="FilePathEdit.h" />
     <ClInclude Include="FolderList_TreeView.h" />
     <ClInclude Include="MainWindowHeader.h" />

@@ -5,6 +5,7 @@
 #include "FolderList_TreeView.h"
 #include "FolderRegisterBtn.h"
 #include "FilePathEdit.h"
+#include "FileListView.h"
 class MainWindow
 {
 public:
@@ -27,6 +28,7 @@ public:
 	TreeView_FolderList TreeView_FolderList_Instance;
 	FolderRegisterBtn FolderRegisterBtn_Instance;
 	FilePathEdit FilePathEdit_Instance;
+	FileListView FileListView_Instance;
 
 public:
 	MainWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdSow);
