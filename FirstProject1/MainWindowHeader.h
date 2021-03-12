@@ -6,6 +6,7 @@
 #include "FolderRegisterBtn.h"
 #include "FilePathEdit.h"
 #include "FileListView.h"
+#include "BrowseFolderHeader.h"
 
 class MainWindow
 {
@@ -30,6 +31,7 @@ public:
 	FolderRegisterBtn FolderRegisterBtn_Instance;
 	FilePathEdit FilePathEdit_Instance;
 	FileListView FileListView_Instance;
+	FolderPathDecision FolderPathDecision_Instance;
 
 public:
 	MainWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdSow);
@@ -44,8 +46,8 @@ public:
 	LRESULT OnDestroy(HWND hWnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam);
 
-	static int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
-	BOOL BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFolder);
+	//static int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
+	//BOOL BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFolder);
 };
 
 

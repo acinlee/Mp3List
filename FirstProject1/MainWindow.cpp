@@ -62,9 +62,9 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	switch(LOWORD(wParam))
 	{
 	case FolderRegisterBtn::m_ID_Btn:
-		if (BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.UserSelectFolder) == TRUE)
+		if (FolderPathDecision_Instance.BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.m_UserSelectFolder) == TRUE)
 		{
-			SetWindowText(FilePathEdit_Instance.m_FilePathEdit, FilePathEdit_Instance.UserSelectFolder);
+			SetWindowText(FilePathEdit_Instance.m_FilePathEdit, FilePathEdit_Instance.m_UserSelectFolder);
 		}
 	}
 	return 0;
@@ -89,45 +89,4 @@ LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LP
 	}
 
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
-}
-
-int CALLBACK MainWindow::BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
-{
-	switch (uMsg) {
-	case BFFM_INITIALIZED:
-		if (lpData != NULL) {
-			SendMessage(hwnd, BFFM_SETSELECTION, TRUE, (LPARAM)lpData);
-		}
-		break;
-	}
-	return 0;
-}
-
-BOOL MainWindow::BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFolder)
-{
-	LPMALLOC pMalloc;
-	LPITEMIDLIST pidl;
-	BROWSEINFO bi = { 0, };
-
-	bi.hwndOwner = hParent;
-	bi.pidlRoot = NULL;
-	bi.pszDisplayName = NULL;
-	bi.lpszTitle = szTitle;
-	bi.ulFlags = 0;
-	bi.lpfn = BrowseCallbackProc;;
-	bi.lParam = (LPARAM)StartPath;
-
-	pidl = SHBrowseForFolder(&bi);
-
-	if (pidl == NULL) {
-		return FALSE;
-	}
-	SHGetPathFromIDList(pidl, szFolder);
-
-	if (SHGetMalloc(&pMalloc) != NOERROR) {
-		return FALSE;
-	}
-	pMalloc->Free(pidl);
-	pMalloc->Release();
-	return TRUE;
 }
