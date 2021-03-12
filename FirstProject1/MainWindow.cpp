@@ -42,11 +42,10 @@ LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 	InitCommonControls();
 	TreeView_FolderList_Instance.Create(hWnd, m_hInstance);
-	TreeView_FolderList_Instance.InsertFolderList();
 	FolderRegisterBtn_Instance.Create(hWnd, m_hInstance);
 	FilePathEdit_Instance.Create(hWnd, m_hInstance);
 	FileListView_Instance.Create(hWnd, m_hInstance);
-	FileListView_Instance.FileListInsert();
+	FileListView_Instance.FileListClassificationInsert();
 	return 0;
 }
 
@@ -65,6 +64,7 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 		if (FolderPathDecision_Instance.BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.m_UserSelectFolder) == TRUE)
 		{
 			SetWindowText(FilePathEdit_Instance.m_FilePathEdit, FilePathEdit_Instance.m_UserSelectFolder);
+			TreeView_FolderList_Instance.InsertFolderList(FilePathEdit_Instance.m_UserSelectFolder, (HTREEITEM)0);
 		}
 	}
 	return 0;

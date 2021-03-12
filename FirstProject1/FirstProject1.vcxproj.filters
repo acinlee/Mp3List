@@ -21,9 +21,6 @@
     <ClCompile Include="MainWindow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Main_FolderList_TreeView.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="FolderRegisterBtn.h">
       <Filter>헤더 파일</Filter>
     </ClCompile>
@@ -39,7 +36,7 @@
     <ClCompile Include="BrowseFolderMain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BrowseFolderHeader.cpp">
+    <ClCompile Include="FolderList_TreeViewMain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
