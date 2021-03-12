@@ -20,7 +20,7 @@ HWND FileListView::Create(HWND hWnd, HINSTANCE hInstance)
 	return (m_FileListView = CreateWindow(WC_LISTVIEW, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | LVS_REPORT, 410, 100, 620, 200, m_hParent, NULL, m_hInstance, NULL));
 }
 
-void FileListView::FileListInsert()
+void FileListView::FileListClassificationInsert()
 {
 	m_COL.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 	m_COL.fmt = LVCFMT_LEFT;

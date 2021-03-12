@@ -17,6 +17,7 @@ public:
 public:
 	FileListView();
 	HWND Create(HWND hWnd, HINSTANCE hInstance);
+	void FileListClassificationInsert();
 	void FileListInsert();
 
 };

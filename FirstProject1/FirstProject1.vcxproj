@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BrowseFolderHeader.cpp" />
     <ClCompile Include="BrowseFolderMain.cpp" />
     <ClCompile Include="FileListViewMain.cpp" />
     <ClCompile Include="FilePathEditMain.cpp" />
@@ -31,7 +30,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="Main_FolderList_TreeView.cpp" />
+    <ClCompile Include="FolderList_TreeViewMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BrowseFolderHeader.h" />

@@ -22,6 +22,7 @@ public:
 public:
 	TreeView_FolderList();
 	HWND Create(HWND hWnd, HINSTANCE hInstance);
-	void InsertFolderList();
+	void InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE);
+
 };
 #endif // !FileList_TreeView
