@@ -2,9 +2,11 @@
 #include <SHLOBJ.H>
 int CALLBACK FolderPathDecision::BrowseCallbackProc(HWND hWnd, UINT iMessage, LPARAM lParam, LPARAM lpData)
 {
-	switch (iMessage) {
+	switch (iMessage) 
+	{
 	case BFFM_INITIALIZED:
-		if (lpData != NULL) {
+		if (lpData != NULL) 
+		{
 			SendMessage(hWnd, BFFM_SETSELECTION, TRUE, (LPARAM)lpData);
 		}
 		break;

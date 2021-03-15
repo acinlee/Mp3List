@@ -19,21 +19,30 @@ HWND TreeView_FolderList::Create(HWND hWnd, HINSTANCE hInstance)
 	return (m_hTreeFolerList=CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 100, 400, 200, hWnd, NULL, m_hInstance, NULL));
 }
 
+void TreeView_FolderList::InsertRootFolder(TCHAR* path)
+{
+	TreeView_DeleteAllItems(m_hTreeFolerList);
+	m_TI.hParent = TVI_ROOT;
+	m_TI.hInsertAfter = TVI_LAST;
+	m_TI.item.mask = TVIF_TEXT;
+	m_TI.item.pszText = path;
+	m_HTREE = TreeView_InsertItem(m_hTreeFolerList, &m_TI);
+	
+	wsprintf(path, "%s\\*.*", path);
+	
+	InsertFolderList(path, m_HTREE);
+}
+
 void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE)
 {
 	HANDLE hSrch;
 	WIN32_FIND_DATA wfd;
 	BOOL bResult = TRUE;
-	//TCHAR full_path[MAX_PATH]; //전체 경로
 	TCHAR drive[_MAX_DRIVE]; //드라이브명
 	TCHAR dir[_MAX_DIR]; //디렉토리 경로
 	TCHAR fname[_MAX_FNAME]; // 파일명
 	TCHAR ext[_MAX_EXT]; //확장자 명
 	TCHAR newpath[MAX_PATH];
-
-	//트리뷰
-	TVINSERTSTRUCT TI;
-	HTREEITEM HTREE;
 
 	hSrch = FindFirstFile(path, &wfd);
 	if (hSrch == INVALID_HANDLE_VALUE)
@@ -41,12 +50,6 @@ void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE)
 		return;
 	}
 	_splitpath_s(path, drive, dir, fname, ext);
-
-	TI.hParent = Parent_TREE;
-	TI.hInsertAfter = TVI_LAST;
-	TI.item.mask = TVIF_TEXT;
-	TI.item.pszText = dir;
-	HTREE = TreeView_InsertItem(m_hTreeFolerList, &TI);
 
 	while (bResult)
 	{
@@ -56,16 +59,16 @@ void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE)
 			if (lstrcmp(wfd.cFileName, ".") && lstrcmp(wfd.cFileName, ".."))
 			{
 				wsprintf(newpath, "%s%s%s\\*.*", drive, dir, wfd.cFileName);
-				InsertFolderList(newpath, HTREE);
+				InsertFolderList(newpath, Parent_TREE);
 			}
 			else
 			{
 				wsprintf(newpath, "%s", dir);
-				TI.hParent = HTREE;
-				TI.hInsertAfter = TVI_LAST;
-				TI.item.mask = TVIF_TEXT;
-				TI.item.pszText = newpath;
-				HTREE = TreeView_InsertItem(m_hTreeFolerList, &TI);
+				m_TI.hParent = Parent_TREE;
+				m_TI.hInsertAfter = TVI_LAST;
+				m_TI.item.mask = TVIF_TEXT;
+				m_TI.item.pszText = newpath;
+				m_HTREE = TreeView_InsertItem(m_hTreeFolerList, &m_TI);
 			}
 		}
 		bResult = FindNextFile(hSrch, &wfd);

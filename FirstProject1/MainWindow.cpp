@@ -31,7 +31,7 @@ void MainWindow::Create()
 	m_WndClass.lpfnWndProc = WndProc;
 	m_WndClass.lpszClassName = m_lpszClass;
 	m_WndClass.lpszMenuName = NULL;
-	m_WndClass.style = CS_HREDRAW | CS_VREDRAW;//넓이, 높이 변경 시 윈도우 다시 그림
+	m_WndClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;//넓이, 높이 변경 시 윈도우 다시 그림, 더블클릭 지원
 	RegisterClass(&m_WndClass);
 	
 	m_Main_Window = CreateWindow(m_lpszClass, m_lpszClass, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, (HMENU)NULL, m_hInstance, this);
@@ -61,11 +61,13 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	switch(LOWORD(wParam))
 	{
 	case FolderRegisterBtn::m_ID_Btn:
-		if (FolderPathDecision_Instance.BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.m_UserSelectFolder) == TRUE)
+		/*if (FolderPathDecision_Instance.BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.m_UserSelectFolder) == TRUE)
 		{
 			SetWindowText(FilePathEdit_Instance.m_FilePathEdit, FilePathEdit_Instance.m_UserSelectFolder);
-			TreeView_FolderList_Instance.InsertFolderList(FilePathEdit_Instance.m_UserSelectFolder, (HTREEITEM)0);
-		}
+			TreeView_FolderList_Instance.InsertRootFolder(FilePathEdit_Instance.m_UserSelectFolder);
+		}*/
+		Mp3InfoWnd_Instance.Create(m_hWnd, m_hInstance);
+		return 0;
 	}
 	return 0;
 }
@@ -82,7 +84,7 @@ LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LP
 		return 0;
 	case WM_COMMAND:
 		main->OnCommand(hWnd, wParam, lParam);
-		return FALSE;
+		return 0;
 	case WM_DESTROY:
 		main->OnDestroy(hWnd, wParam, lParam);
 		return 0;
@@ -90,3 +92,13 @@ LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LP
 
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
 }
+
+/*BOOL MainWindow::Mp3DlgProc(HWND hDlg, UINT iMessage, WPARAM wParam, LPARAM lParam)
+{
+	switch (iMessage)
+	{
+	case WM_INITDIALOG:
+		return TRUE;
+	}
+	return FALSE;
+}*/
