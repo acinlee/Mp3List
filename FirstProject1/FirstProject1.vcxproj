@@ -31,6 +31,7 @@
     </ClCompile>
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="FolderList_TreeViewMain.cpp" />
+    <ClCompile Include="Mp3InfoWndMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BrowseFolderHeader.h" />
@@ -38,6 +39,11 @@
     <ClInclude Include="FilePathEdit.h" />
     <ClInclude Include="FolderList_TreeView.h" />
     <ClInclude Include="MainWindowHeader.h" />
+    <ClInclude Include="Mp3InfoWndHeader.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FirstProject1.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

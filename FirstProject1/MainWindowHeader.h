@@ -7,7 +7,8 @@
 #include "FilePathEdit.h"
 #include "FileListView.h"
 #include "BrowseFolderHeader.h"
-
+#include "Mp3InfoWndHeader.h"
+#include "resource.h"
 class MainWindow
 {
 public:
@@ -32,7 +33,7 @@ public:
 	FilePathEdit FilePathEdit_Instance;
 	FileListView FileListView_Instance;
 	FolderPathDecision FolderPathDecision_Instance;
-
+	Mp3InfoWnd Mp3InfoWnd_Instance;
 public:
 	MainWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdSow);
 	/*일반적으로 윈도우 프로시져는 static이어야 하기 때문에 어떤 클래스의 멤버변수로 두려면 static
@@ -45,9 +46,6 @@ public:
 	LRESULT OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnDestroy(HWND hWnd, WPARAM wParam, LPARAM lParam);
 	LRESULT OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam);
-
-	//static int CALLBACK BrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
-	//BOOL BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCTSTR StartPath, TCHAR* szFolder);
 };
 
 
