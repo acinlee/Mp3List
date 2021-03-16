@@ -21,7 +21,7 @@ public:
 	*/
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 	void Create();
-	MSG m_Message;
+	LPMSG get_LMessage();
 	MSG get_Message();
 private:
 	LRESULT OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam);
@@ -32,7 +32,7 @@ private:
 private:
 	HWND m_Main_Window;
 	LPCTSTR m_lpszClass;
-	//MSG m_Message;
+	MSG m_Message;
 	WNDCLASS m_WndClass;
 
 	//MainMessageProc 메시지 처리 관련
@@ -44,7 +44,7 @@ private:
 private:
 	TreeView_FolderList m_folderTree;
 	//todo : MyButton으로 이름 변경 및 공통화
-	FolderRegisterBtn m_setHomeFolderButton;
+	MyButton m_setHomeFolderButton;
 	//todo  : 제거
 	FilePathEdit FilePathEdit_Instance;
 

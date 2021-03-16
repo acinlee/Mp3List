@@ -13,11 +13,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLin
 	//main_window.Create();
 	MainWindow main;
 	main.Create();
-	while (GetMessage(&main.m_Message, NULL, 0, 0))
+	while (GetMessage(main.get_LMessage(), NULL, 0, 0))
 	{
-		TranslateMessage(&main.m_Message);
-		DispatchMessage(&main.m_Message);
+		TranslateMessage(main.get_LMessage());
+		DispatchMessage(main.get_LMessage());
 	}
 
-	return (int)main.m_Message.wParam;
+	return (int)main.get_Message().wParam;
 }
