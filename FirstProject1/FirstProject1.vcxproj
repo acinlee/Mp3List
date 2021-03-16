@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileListViewMain.cpp" />
-    <ClCompile Include="FilePathEditMain.cpp" />
     <ClCompile Include="FindMp3.cpp" />
     <ClCompile Include="FolderRegisterBtn.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -32,15 +31,16 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="FolderList_TreeView.cpp" />
     <ClCompile Include="Mp3InfoWndMain.cpp" />
+    <ClCompile Include="StaticText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileListView.h" />
-    <ClInclude Include="FilePathEdit.h" />
     <ClInclude Include="FolderList_TreeView.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Mp3InfoWndHeader.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="StaticText.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FirstProject1.rc" />
