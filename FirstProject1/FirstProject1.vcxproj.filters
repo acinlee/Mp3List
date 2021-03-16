@@ -24,7 +24,7 @@
     <ClCompile Include="FolderRegisterBtn.h">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FolderRegisterBtnMain.cpp">
+    <ClCompile Include="FolderRegisterBtn.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="FilePathEditMain.cpp">
