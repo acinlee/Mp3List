@@ -28,8 +28,9 @@ void TreeView_FolderList::InsertRootFolder(TCHAR* path)
 	m_TI.item.pszText = path;
 	m_HTREE = TreeView_InsertItem(m_hTreeFolerList, &m_TI);
 	
+	//todo : stringstream
 	wsprintf(path, "%s\\*.*", path);
-	
+
 	InsertFolderList(path, m_HTREE);
 }
 
