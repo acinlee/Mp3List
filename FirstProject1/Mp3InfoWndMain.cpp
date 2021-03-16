@@ -11,6 +11,15 @@ BOOL CALLBACK Mp3InfoWnd::Mp3DlgProc(HWND hDlg, UINT iMessage, WPARAM wParam, LP
 	{
 	case WM_INITDIALOG:
 		return TRUE;
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case IDOK:
+		case IDCANCEL:
+			EndDialog(hDlg, LOWORD(wParam));
+			return TRUE;
+		}
+		break;
 	}
 	return FALSE;
 }

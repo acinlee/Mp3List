@@ -11,6 +11,8 @@ FileListView::FileListView()
 	//리스트뷰
 	m_COL = { 0, };
 	m_LI = { 0, };
+
+	file_num = 0;
 }
 
 HWND FileListView::Create(HWND hWnd, HINSTANCE hInstance)
@@ -48,4 +50,70 @@ void FileListView::FileListClassificationInsert()
 	m_COL.pszText = const_cast<char*>("앨범");
 	m_COL.iSubItem = 4;
 	SendMessage(m_FileListView, LVM_INSERTCOLUMN, 4, (LPARAM)&m_COL);
+}
+
+void FileListView::FileListInsert(TCHAR *path, int file_num)
+{
+	HANDLE hSrch;
+	WIN32_FIND_DATA wfd;
+	BOOL bResult = TRUE;
+	TCHAR drive[_MAX_DRIVE]; //드라이브명
+	TCHAR dir[_MAX_DIR]; //디렉토리 경로
+	TCHAR fname[_MAX_FNAME]; // 파일명
+	TCHAR ext[_MAX_EXT]; //확장자 명
+	TCHAR newpath[MAX_PATH];
+	
+	
+	hSrch = FindFirstFile(path, &wfd);
+	if (hSrch == INVALID_HANDLE_VALUE)
+	{
+		return;
+	}
+	_splitpath_s(path, drive, dir, fname, ext);
+
+	while (bResult)
+	{
+		//디렉토리인지 검사
+		if (wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+		{
+
+			if (lstrcmp(wfd.cFileName, ".") && lstrcmp(wfd.cFileName, ".."))
+			{
+				wsprintf(newpath, "%s%s%s\\*.*", drive, dir, wfd.cFileName);
+				++file_num;
+				FileListInsert(newpath, file_num);
+			}
+			else
+			{
+				//여기서 파일 split해서 sendmessage to listview
+				LPSTR texts = NULL;
+				wsprintf(fname, "%s%s%s", drive, dir, wfd.cFileName);
+				//TagLib::FileRef f(fname);
+				/*TagLib::String artist = f.tag()->artist();
+				wsprintf(texts, "%s", artist);
+				
+				m_LI.iSubItem = 0;
+				m_LI.iItem = file_num;*/
+				//m_LI.pszText = texts;
+				/*if (id3Tag.Open(fname) == TRUE)
+				{
+					if (id3Tag.ContainsInfo(MetadataInfo::ID3::TITLE) == TRUE)
+					{
+						m_LI.iSubItem = 0;
+						m_LI.iItem = file_num;
+						m_LI.pszText = const_cast<char*>(UTF16ToUTF8(id3Tag.GetStringValue(MetadataInfo::ID3::TITLE).c_str()).c_str());
+						long frameDataSize = id3Tag.GetBinarySize(MetadataInfo::ID3::COVER_IMAGE);
+						char* buffer = (char*)malloc(frameDataSize);
+						id3Tag.GetBinaryValue(MetadataInfo::ID3::COVER_IMAGE, buffer, frameDataSize);
+						long imageDataSize = 0; 
+						const char* imageData = id3Tag.GetBinaryImage(buffer, frameDataSize, imageDataSize);
+					}
+				}*/
+				SendMessage(m_FileListView, LVM_INSERTITEM, 0, (LPARAM)&m_LI);
+
+			}
+		}
+		bResult = FindNextFile(hSrch, &wfd);
+	}
+	FindClose(hSrch);
 }

@@ -1,3 +1,15 @@
-﻿  Mp3Find.cpp
-MSVCRTD.lib(exe_main.obj) : error LNK2019: main"int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
-C:\Users\ldj\source\repos\FirstProject1\x64\Debug\FirstProject1.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
+﻿  BrowseFolderMain.cpp
+  FileListViewMain.cpp
+  FilePathEditMain.cpp
+C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FilePathEditMain.cpp(15,27): warning C4312: '형식 캐스트': 'const int'에서 더 큰 'HMENU'(으)로의 변환입니다.
+  FindMp3.cpp
+  FolderRegisterBtnMain.cpp
+C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FolderRegisterBtnMain.cpp(15,32): warning C4312: '형식 캐스트': 'const int'에서 더 큰 'HMENU'(으)로의 변환입니다.
+  FolderRegisterBtn.h
+  MainWindow.cpp
+  FolderList_TreeViewMain.cpp
+  Mp3InfoWndMain.cpp
+C:\Users\ldj\source\repos\FirstProject1\FirstProject1\Mp3InfoWndMain.cpp(5,2): error C2664: 'INT_PTR DialogBoxParamA(HINSTANCE,LPCSTR,HWND,DLGPROC,LPARAM)': 인수 4을(를) 'BOOL (__cdecl *)(HWND,UINT,WPARAM,LPARAM)'에서 'DLGPROC'(으)로 변환할 수 없습니다.
+C:\Users\ldj\source\repos\FirstProject1\FirstProject1\Mp3InfoWndMain.cpp(5,2): message : 대상 형식과 일치하는 범위에 이름이 같은 함수가 없습니다.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\winuser.h(5059,1): message : 'DialogBoxParamA' 선언을 참조하십시오.
+  코드를 생성하고 있습니다...

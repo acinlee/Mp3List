@@ -29,8 +29,9 @@
     <ClCompile Include="FolderRegisterBtn.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="global.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="FolderList_TreeViewMain.cpp" />
+    <ClCompile Include="FolderList_TreeView.cpp" />
     <ClCompile Include="Mp3InfoWndMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -38,7 +39,8 @@
     <ClInclude Include="FileListView.h" />
     <ClInclude Include="FilePathEdit.h" />
     <ClInclude Include="FolderList_TreeView.h" />
-    <ClInclude Include="MainWindowHeader.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Mp3InfoWndHeader.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -70,7 +72,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -115,10 +117,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
