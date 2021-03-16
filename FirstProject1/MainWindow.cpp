@@ -43,10 +43,11 @@ MSG MainWindow::get_Message()
 LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 	//todo : 초기 생성 위치(x, y, width, height값) 파라미터로 분리
-	m_folderTree.Create(hWnd, Global::get_hInstance());
+	m_folderTree.Create(hWnd, Global::get_hInstance(), 10, 100, 400, 200);
 	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance(), "폴더 등록", 440, 20, 100, 25, 100);
-	FilePathEdit_Instance.Create(hWnd, Global::get_hInstance());
-	m_filListView.Create(hWnd, Global::get_hInstance());
+	//Edit box 대신에 static text로 교체 예정
+	//FilePathEdit_Instance.Create(hWnd, Global::get_hInstance());
+	m_filListView.Create(hWnd, Global::get_hInstance(), 410, 100, 420, 200);
 	//todo : Create에서 하도록 위치 변경
 	return 0;
 }

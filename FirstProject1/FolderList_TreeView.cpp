@@ -3,20 +3,21 @@
 #include <CommCtrl.h>
 #pragma comment(lib, "comctl32.lib")
 
-TreeView_FolderList::TreeView_FolderList()
+TreeView_FolderList::TreeView_FolderList():m_ParentWnd(NULL), m_hTreeFolerList(NULL),
+m_hInstance(NULL), m_TI({0}), m_HTREE(NULL), m_x(0), m_y(0), m_width(0), m_height(0)
 {
-	m_ParentWnd = NULL;
-	m_hTreeFolerList = NULL;
-	m_hInstance = NULL;
-	m_TI = {0,};
-	m_HTREE = {0,};
 }
 
-HWND TreeView_FolderList::Create(HWND hWnd, HINSTANCE hInstance)
+HWND TreeView_FolderList::Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height)
 {
 	m_ParentWnd = hWnd;
 	m_hInstance = hInstance;
-	return (m_hTreeFolerList=CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, 10, 100, 400, 200, hWnd, NULL, m_hInstance, NULL));
+	m_x = x;
+	m_y = y;
+	m_width = width;
+	m_height = height;
+
+	return (m_hTreeFolerList = CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, x, y, width, height, hWnd, NULL, m_hInstance, NULL));
 }
 
 void TreeView_FolderList::InsertRootFolder(TCHAR* path)
