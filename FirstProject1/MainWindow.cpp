@@ -30,6 +30,11 @@ void MainWindow::Create()
 	ShowWindow(m_Main_Window, SW_SHOW);
 }
 
+LPMSG MainWindow::get_LMessage()
+{
+	return &m_Message;
+}
+
 MSG MainWindow::get_Message()
 {
 	return m_Message;
@@ -37,13 +42,12 @@ MSG MainWindow::get_Message()
 
 LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
-	//todo : 초기 생성 위치 파라미터로 분리
+	//todo : 초기 생성 위치(x, y, width, height값) 파라미터로 분리
 	m_folderTree.Create(hWnd, Global::get_hInstance());
-	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance());
+	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance(), "폴더 등록", 440, 20, 100, 25, 100);
 	FilePathEdit_Instance.Create(hWnd, Global::get_hInstance());
 	m_filListView.Create(hWnd, Global::get_hInstance());
 	//todo : Create에서 하도록 위치 변경
-	m_filListView.FileListClassificationInsert();
 	return 0;
 }
 
@@ -51,15 +55,15 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 	switch(LOWORD(wParam))
 	{
-	case FolderRegisterBtn::m_ID_Btn:
+	//case m_setHomeFolderButton.m_id:
 		//todo : class naming -> FolderPicker
-		FolderPathDecision folderPicker;
+		/*FolderPathDecision folderPicker;
 		if (folderPicker.BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.m_UserSelectFolder) == TRUE)
 		{
 			SetWindowText(FilePathEdit_Instance.m_FilePathEdit, FilePathEdit_Instance.m_UserSelectFolder);
 			m_folderTree.InsertRootFolder(FilePathEdit_Instance.m_UserSelectFolder);
 			m_filListView.FileListInsert(FilePathEdit_Instance.m_UserSelectFolder, m_filListView.file_num);
-		}
+		}*/
 		//Mp3InfoWnd_Instance.Create(m_hWnd, m_hInstance);
 		return 0;
 	}
