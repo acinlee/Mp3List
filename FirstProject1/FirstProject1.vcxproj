@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BrowseFolderMain.cpp" />
     <ClCompile Include="FileListViewMain.cpp" />
     <ClCompile Include="FilePathEditMain.cpp" />
     <ClCompile Include="FindMp3.cpp" />
@@ -35,7 +34,6 @@
     <ClCompile Include="Mp3InfoWndMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BrowseFolderHeader.h" />
     <ClInclude Include="FileListView.h" />
     <ClInclude Include="FilePathEdit.h" />
     <ClInclude Include="FolderList_TreeView.h" />

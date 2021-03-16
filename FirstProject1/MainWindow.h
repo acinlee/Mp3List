@@ -6,7 +6,6 @@
 #include "FolderRegisterBtn.h"
 #include "FilePathEdit.h"
 #include "FileListView.h"
-#include "BrowseFolderHeader.h"
 #include "Mp3InfoWndHeader.h"
 #include "resource.h"
 
@@ -20,6 +19,8 @@ public:
 	그렇기 때문에 static 선언을 붙여줘야 하며 CreateWindow을 return 할 시 마지막 매개변수로 this를 전달 해야 한다.
 	*/
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
+	static int CALLBACK BrowseCallbackProc(HWND hWnd, UINT iMessage, LPARAM lParam, LPARAM lpData);
+	BOOL BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCSTR StartPath, TCHAR* szFolder);
 	void Create();
 	LPMSG get_LMessage();
 	MSG get_Message();
@@ -46,7 +47,6 @@ private:
 	//todo : MyButton으로 이름 변경 및 공통화
 	MyButton m_setHomeFolderButton;
 	//todo  : 제거
-	FilePathEdit FilePathEdit_Instance;
 
 	FileListView m_filListView;
 	

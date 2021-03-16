@@ -1,11 +1,10 @@
 #pragma once
 #include "MainWindow.h"
 #include <CommCtrl.h>
+#include <SHLOBJ.H>
 #include "global.h"
 #pragma comment(lib, "comctl32.lib")
 
-//todo : gobal.h 를 만들어 class 화
-//extern HINSTANCE g_hInstance;
 //todo : 생성자 초기화나 선언부에서 초기화 하도록 변경.
 MainWindow::MainWindow():m_Main_Window(NULL), m_lpszClass(TEXT("default")), m_Message({ 0, }), 
 m_WndClass({ 0, }), m_hWnd(NULL), m_iMessage(NULL), m_wParam(NULL), m_lParam(NULL)
@@ -59,7 +58,7 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	//case m_setHomeFolderButton.m_id:
 		//todo : class naming -> FolderPicker
 		/*FolderPathDecision folderPicker;
-		if (folderPicker.BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.m_UserSelectFolder) == TRUE)
+		if (BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.m_UserSelectFolder) == TRUE)
 		{
 			SetWindowText(FilePathEdit_Instance.m_FilePathEdit, FilePathEdit_Instance.m_UserSelectFolder);
 			m_folderTree.InsertRootFolder(FilePathEdit_Instance.m_UserSelectFolder);
@@ -106,3 +105,47 @@ LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LP
 
 	return(DefWindowProc(hWnd, iMessage, wParam, lParam));
 }
+
+int CALLBACK MainWindow::BrowseCallbackProc(HWND hWnd, UINT iMessage, LPARAM lParam, LPARAM lpData)
+{
+	switch (iMessage)
+	{
+	case BFFM_INITIALIZED:
+		if (lpData != NULL)
+		{
+			SendMessage(hWnd, BFFM_SETSELECTION, TRUE, (LPARAM)lpData);
+		}
+		break;
+	}
+	return 0;
+}
+
+BOOL MainWindow::BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCSTR StartPath, TCHAR* szFolder)
+{
+	LPMALLOC pMalloc;
+	LPITEMIDLIST pidl;
+	BROWSEINFO bi = { 0, };
+
+	bi.hwndOwner = hParent;
+	bi.pidlRoot = NULL;
+	bi.pszDisplayName = NULL;
+	bi.lpszTitle = szTitle;
+	bi.ulFlags = 0;
+	bi.lpfn = BrowseCallbackProc;;
+	bi.lParam = (LPARAM)StartPath;
+
+	pidl = SHBrowseForFolder(&bi);
+
+	if (pidl == NULL) {
+		return FALSE;
+	}
+	SHGetPathFromIDList(pidl, szFolder);
+
+	if (SHGetMalloc(&pMalloc) != NOERROR) {
+		return FALSE;
+	}
+	pMalloc->Free(pidl);
+	pMalloc->Release();
+	return TRUE;
+}
+
