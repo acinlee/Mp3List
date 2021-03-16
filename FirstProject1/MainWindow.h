@@ -4,9 +4,9 @@
 #include <SHLOBJ.H>
 #include "FolderList_TreeView.h"
 #include "FolderRegisterBtn.h"
-#include "FilePathEdit.h"
 #include "FileListView.h"
 #include "Mp3InfoWndHeader.h"
+#include "StaticText.h"
 #include "resource.h"
 
 class MainWindow
@@ -46,8 +46,7 @@ private:
 	TreeView_FolderList m_folderTree;
 	//todo : MyButton으로 이름 변경 및 공통화
 	MyButton m_setHomeFolderButton;
-	//todo  : 제거
-
+	StaticText m_FilePath;
 	FileListView m_filListView;
 	
 	Mp3InfoWnd m_mp3InfoWnd;
