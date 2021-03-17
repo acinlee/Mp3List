@@ -3,7 +3,7 @@
 #pragma comment(lib, "comctl32.lib")
 
 FileListView::FileListView():m_hParent(NULL), m_FileListView(NULL), m_hInstance(NULL), m_x(0), m_y(0), m_width(0), m_height(0),
-m_COL({0,}), m_LI({0,}), m_filenum(0)
+m_COL({0,}), m_LI({0,})
 {
 }
 
@@ -48,7 +48,7 @@ HWND FileListView::Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int widt
 	return m_FileListView;
 }
 
-void FileListView::FileListInsert(TCHAR *path, int file_num)
+void FileListView::FileListInsert(TCHAR *path)
 {
 	HANDLE hSrch;
 	WIN32_FIND_DATA wfd;
@@ -76,8 +76,7 @@ void FileListView::FileListInsert(TCHAR *path, int file_num)
 			if (lstrcmp(wfd.cFileName, ".") && lstrcmp(wfd.cFileName, ".."))
 			{
 				wsprintf(newpath, "%s%s%s\\*.*", drive, dir, wfd.cFileName);
-				++file_num;
-				FileListInsert(newpath, file_num);
+				FileListInsert(newpath);
 			}
 			else
 			{

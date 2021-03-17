@@ -11,7 +11,7 @@ class FileListView {
 public:
 	FileListView();
 	HWND Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height);
-	void FileListInsert(TCHAR* path, int file_num);
+	void FileListInsert(TCHAR* path);
 
 private:
 	HWND m_hParent;
@@ -28,7 +28,5 @@ private:
 	int m_width;
 	int m_height;
 
-	//파일 개수
-	int m_filenum;
 };
 #endif // !FileListViewHeader
