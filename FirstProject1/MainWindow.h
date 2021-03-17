@@ -44,7 +44,6 @@ private:
 
 private:
 	TreeView_FolderList m_folderTree;
-	//todo : MyButton으로 이름 변경 및 공통화
 	MyButton m_setHomeFolderButton;
 	StaticText m_FilePath;
 	FileListView m_filListView;

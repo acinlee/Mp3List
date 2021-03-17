@@ -9,6 +9,8 @@
 #define IDC_EDIT4                       1004
 #define IDC_EDIT5                       1005
 
+//control id
+#define SET_HOME_FOLDER_BTN 100
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

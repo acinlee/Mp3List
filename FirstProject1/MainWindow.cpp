@@ -41,9 +41,8 @@ MSG MainWindow::get_Message()
 
 LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
-	//todo : 초기 생성 위치(x, y, width, height값) 파라미터로 분리
 	m_folderTree.Create(hWnd, Global::get_hInstance(), 10, 100, 400, 200);
-	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance(), "폴더 등록", 440, 20, 100, 25, 100);
+	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance(), "폴더 선택", 440, 20, 100, 25, SET_HOME_FOLDER_BTN);
 	m_FilePath.Create(hWnd, Global::get_hInstance(), 10, 20, 400, 25);
 	m_filListView.Create(hWnd, Global::get_hInstance(), 410, 100, 420, 200);
 	return 0;
@@ -54,15 +53,14 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	switch(LOWORD(wParam))
 	{
 	//case에서 상수 값을 전달해야되는데 버튼 id값이 인스턴스 내부의 값이라 상수가 아님
-	//case m_setHomeFolderButton.m_id:
+	case SET_HOME_FOLDER_BTN:
 		//todo : class naming -> FolderPicker
-		/*FolderPathDecision folderPicker;
-		if (BrowseFolder(hWnd, NULL, NULL, FilePathEdit_Instance.m_UserSelectFolder) == TRUE)
+		if (BrowseFolder(hWnd, NULL, NULL, m_FilePath.get_path()) == TRUE)
 		{
-			SetWindowText(FilePathEdit_Instance.m_FilePathEdit, FilePathEdit_Instance.m_UserSelectFolder);
-			m_folderTree.InsertRootFolder(FilePathEdit_Instance.m_UserSelectFolder);
-			m_filListView.FileListInsert(FilePathEdit_Instance.m_UserSelectFolder, m_filListView.file_num);
-		}*/
+			SetWindowText(m_FilePath.get_statictext(), m_FilePath.get_path());
+			m_folderTree.InsertRootFolder(m_FilePath.get_path());
+			m_filListView.FileListInsert(m_FilePath.get_path());
+		}
 		//Mp3InfoWnd_Instance.Create(m_hWnd, m_hInstance);
 		return 0;
 	}
