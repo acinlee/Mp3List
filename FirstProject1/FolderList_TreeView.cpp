@@ -1,6 +1,7 @@
 #pragma once
 #include "FolderList_TreeView.h"
 #include <CommCtrl.h>
+#include <sstream>
 #pragma comment(lib, "comctl32.lib")
 
 TreeView_FolderList::TreeView_FolderList():m_ParentWnd(NULL), m_hTreeFolerList(NULL),
@@ -30,12 +31,15 @@ void TreeView_FolderList::InsertRootFolder(TCHAR* path)
 	m_HTREE = TreeView_InsertItem(m_hTreeFolerList, &m_TI);
 	
 	//todo : stringstream
-	wsprintf(path, "%s\\*.*", path);
+	std::stringstream nextpath;
+	nextpath << path;
+	nextpath << "\\*.*";
+	nextpath >> path;
 
 	InsertFolderList(path, m_HTREE);
 }
 
-void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE)
+void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM hParent)
 {
 	HANDLE hSrch;
 	WIN32_FIND_DATA wfd;
@@ -45,6 +49,7 @@ void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE)
 	TCHAR fname[_MAX_FNAME]; // 파일명
 	TCHAR ext[_MAX_EXT]; //확장자 명
 	TCHAR newpath[MAX_PATH];
+	std::stringstream nextpath;
 
 	hSrch = FindFirstFile(path, &wfd);
 	if (hSrch == INVALID_HANDLE_VALUE)
@@ -52,7 +57,6 @@ void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE)
 		return;
 	}
 	_splitpath_s(path, drive, dir, fname, ext);
-
 	while (bResult)
 	{
 		//디렉토리인지 검사
@@ -60,13 +64,16 @@ void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE)
 		{
 			if (lstrcmp(wfd.cFileName, ".") && lstrcmp(wfd.cFileName, ".."))
 			{
-				wsprintf(newpath, "%s%s%s\\*.*", drive, dir, wfd.cFileName);
-				InsertFolderList(newpath, Parent_TREE);
+				nextpath << path;
+				nextpath << "\\*.*";
+				nextpath >> newpath;
+				InsertFolderList(newpath, m_HTREE);
 			}
 			else
 			{
-				wsprintf(newpath, "%s", dir);
-				m_TI.hParent = Parent_TREE;
+				nextpath << dir;
+				nextpath >> newpath;
+				m_TI.hParent = m_HTREE;
 				m_TI.hInsertAfter = TVI_LAST;
 				m_TI.item.mask = TVIF_TEXT;
 				m_TI.item.pszText = newpath;
@@ -74,7 +81,6 @@ void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM Parent_TREE)
 			}
 		}
 		bResult = FindNextFile(hSrch, &wfd);
-
 	}
 	FindClose(hSrch);
 }

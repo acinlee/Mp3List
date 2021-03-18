@@ -1,2 +1,3 @@
-﻿  MainWindow.cpp
+﻿  FolderList_TreeView.cpp
+Debug\FolderRegisterBtn.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
   FirstProject1.vcxproj -> C:\Users\ldj\source\repos\FirstProject1\Debug\FirstProject1.exe

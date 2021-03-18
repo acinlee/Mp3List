@@ -1,4 +1,4 @@
-#include "Mp3InfoWndHeader.h"
+#include "Mp3InfoWnd.h"
 
 void Mp3InfoWnd::Create(HWND hWnd, HINSTANCE hInstance)
 {
