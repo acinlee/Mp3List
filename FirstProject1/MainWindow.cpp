@@ -52,9 +52,7 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 	switch(LOWORD(wParam))
 	{
-	//case에서 상수 값을 전달해야되는데 버튼 id값이 인스턴스 내부의 값이라 상수가 아님
 	case SET_HOME_FOLDER_BTN:
-		//todo : class naming -> FolderPicker
 		if (BrowseFolder(hWnd, NULL, NULL, m_FilePath.get_path()) == TRUE)
 		{
 			SetWindowText(m_FilePath.get_statictext(), m_FilePath.get_path());

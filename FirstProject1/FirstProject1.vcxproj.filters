@@ -27,13 +27,13 @@
     <ClCompile Include="FolderRegisterBtn.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="FileListViewMain.cpp">
+    <ClCompile Include="FileListView.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="FolderList_TreeView.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Mp3InfoWndMain.cpp">
+    <ClCompile Include="Mp3InfoWnd.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="global.cpp">
@@ -56,7 +56,7 @@
     <ClInclude Include="resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Mp3InfoWndHeader.h">
+    <ClInclude Include="Mp3InfoWnd.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="global.h">

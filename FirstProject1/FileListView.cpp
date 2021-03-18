@@ -75,14 +75,14 @@ void FileListView::FileListInsert(TCHAR *path)
 
 			if (lstrcmp(wfd.cFileName, ".") && lstrcmp(wfd.cFileName, ".."))
 			{
-				wsprintf(newpath, "%s%s%s\\*.*", drive, dir, wfd.cFileName);
+				//wsprintf(newpath, "%s%s%s\\*.*", drive, dir, wfd.cFileName);
 				FileListInsert(newpath);
 			}
 			else
 			{
 				//여기서 파일 split해서 sendmessage to listview
 				LPSTR texts = NULL;
-				wsprintf(fname, "%s%s%s", drive, dir, wfd.cFileName);
+				//wsprintf(fname, "%s%s%s", drive, dir, wfd.cFileName);
 				//TagLib::FileRef f(fname);
 				/*TagLib::String artist = f.tag()->artist();
 				wsprintf(texts, "%s", artist);

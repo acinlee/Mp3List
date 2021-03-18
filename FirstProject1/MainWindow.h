@@ -5,7 +5,7 @@
 #include "FolderList_TreeView.h"
 #include "FolderRegisterBtn.h"
 #include "FileListView.h"
-#include "Mp3InfoWndHeader.h"
+#include "Mp3InfoWnd.h"
 #include "StaticText.h"
 #include "resource.h"
 
