@@ -1,10 +1,4 @@
-﻿  FileListView.cpp
-C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FileListView.cpp(60,8): warning C4101: 'fname' :참조되지 않은 지역 변수입니다.
-C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FileListView.cpp(61,8): warning C4101: 'ext' :참조되지 않은 지역 변수입니다.
-  FindMp3.cpp
-  FolderList_TreeView.cpp
+﻿  FindMp3.cpp
   MainWindow.cpp
-  StaticText.cpp
-  global.cpp
   코드를 생성하고 있습니다...
   FirstProject1.vcxproj -> C:\Users\ldj\source\repos\FirstProject1\Debug\FirstProject1.exe

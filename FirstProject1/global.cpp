@@ -28,5 +28,6 @@ LPWSTR Global::toLPWSTR(const char *text)
 
 	size_t outSize;
 	mbstowcs_s(&outSize, wtext, size, text, size - 1);
-	return wtext;
+	LPWSTR lptext = wtext;
+	return lptext;
 }

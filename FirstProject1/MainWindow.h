@@ -8,7 +8,7 @@
 #include "Mp3InfoWnd.h"
 #include "StaticText.h"
 #include "resource.h"
-
+#include <locale.h>
 class MainWindow
 {
 public:

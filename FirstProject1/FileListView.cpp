@@ -28,22 +28,22 @@ HWND FileListView::Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int widt
 	m_COL.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
 	m_COL.fmt = LVCFMT_LEFT;
 	m_COL.cx = 150;
-	m_COL.pszText = Global::toLPWSTR(const_cast<char*>("°î¸í"));
+	m_COL.pszText = Global::toLPWSTR("°î¸í");
 	m_COL.iSubItem = 0;
 	SendMessage(m_FileListView, LVM_INSERTCOLUMN, 0, (LPARAM)&m_COL);
 
 	m_COL.cx = 150;
-	m_COL.pszText = Global::toLPWSTR(const_cast<char*>("Artist"));
+	m_COL.pszText = Global::toLPWSTR("Artist");
 	m_COL.iSubItem = 1;
 	SendMessage(m_FileListView, LVM_INSERTCOLUMN, 1, (LPARAM)&m_COL);
 
 	m_COL.cx = 150;
-	m_COL.pszText = Global::toLPWSTR(const_cast<char*>("Á¦ÀÛ³âµµ"));
+	m_COL.pszText = Global::toLPWSTR("Á¦ÀÛ³âµµ");
 	m_COL.iSubItem = 2;
 	SendMessage(m_FileListView, LVM_INSERTCOLUMN, 2, (LPARAM)&m_COL);
 
 	m_COL.cx = 150;
-	m_COL.pszText = Global::toLPWSTR(const_cast<char*>("¾Ù¹ü"));
+	m_COL.pszText = Global::toLPWSTR("¾Ù¹ü");
 	m_COL.iSubItem = 3;
 	SendMessage(m_FileListView, LVM_INSERTCOLUMN, 3, (LPARAM)&m_COL);
 
