@@ -10,8 +10,8 @@ class TreeView_FolderList
 public:
 	TreeView_FolderList();
 	HWND Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height);
-	void InsertRootFolder(TCHAR* path);
-	void InsertFolderList(TCHAR* path, HTREEITEM hParent);
+	void InsertRootFolder(WCHAR* path);
+	void InsertFolderList(WCHAR* path, HTREEITEM hParent);
 
 private:
 	HWND m_ParentWnd;

@@ -1,17 +1,25 @@
 #pragma once
 #ifndef FileListViewHeader
 #define FileListViewHeader
-#include <string.h>
 #include <Windows.h>
 #include <CommCtrl.h>
-#include <string>
 #pragma comment(lib, "comctl32.lib")
 
 class FileListView {
 public:
+	typedef struct
+	{
+		char title[31];
+		char artist[31];
+		char album[31];
+		char year[5];
+	}SongInfo;
+
+public:
 	FileListView();
 	HWND Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height);
-	void FileListInsert(TCHAR* path);
+	void FileListInsert(WCHAR* path);
+	//BOOL Mp3Info(WCHAR* filename, SongInfo* song);
 
 private:
 	HWND m_hParent;
@@ -27,6 +35,7 @@ private:
 	int m_y;
 	int m_width;
 	int m_height;
+
 
 };
 #endif // !FileListViewHeader

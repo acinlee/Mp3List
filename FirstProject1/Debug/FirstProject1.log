@@ -1,3 +1,10 @@
-﻿  FolderList_TreeView.cpp
-Debug\FolderRegisterBtn.obj : warning LNK4042: 개체가 두 번 이상 지정되었습니다. 나머지는 무시됩니다.
+﻿  FileListView.cpp
+C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FileListView.cpp(60,8): warning C4101: 'fname' :참조되지 않은 지역 변수입니다.
+C:\Users\ldj\source\repos\FirstProject1\FirstProject1\FileListView.cpp(61,8): warning C4101: 'ext' :참조되지 않은 지역 변수입니다.
+  FindMp3.cpp
+  FolderList_TreeView.cpp
+  MainWindow.cpp
+  StaticText.cpp
+  global.cpp
+  코드를 생성하고 있습니다...
   FirstProject1.vcxproj -> C:\Users\ldj\source\repos\FirstProject1\Debug\FirstProject1.exe
