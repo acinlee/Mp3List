@@ -1,5 +1,5 @@
 #include "global.h"
-
+#include <stdlib.h>
 //LNK2001 에러 발생 해서 넣은 구문
 /*
 * LNK2001 에러가 나오는 경우는 해당하는 static 변수를 찾을 수 없기 때문
@@ -19,4 +19,14 @@ HINSTANCE Global::get_hInstance()
 void Global::set_hInstance(HINSTANCE hInstance)
 {
 	g_hInstance = hInstance;
+}
+
+LPWSTR Global::toLPWSTR(const char *text)
+{
+	size_t size = strlen(text) + 1;
+	wchar_t* wtext = new wchar_t[size];
+
+	size_t outSize;
+	mbstowcs_s(&outSize, wtext, size, text, size - 1);
+	return wtext;
 }

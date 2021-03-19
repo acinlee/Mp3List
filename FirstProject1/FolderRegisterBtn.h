@@ -7,7 +7,7 @@ class MyButton
 {
 public:
 	MyButton();
-	HWND Create(HWND hWnd, HINSTANCE hInstance, LPCSTR name, int x, int y, int width, int height, int id);
+	HWND Create(HWND hWnd, HINSTANCE hInstance, LPCWSTR name, int x, int y, int width, int height, int id);
 
 private:
 	HWND m_ParentWnd;
@@ -21,7 +21,7 @@ private:
 	int m_height;
 
 	//버튼 이름
-	LPCSTR m_name;
+	LPCWSTR m_name;
 
 	//버튼 ID
 	int m_id;

@@ -6,7 +6,7 @@ m_width(0), m_height(0), m_id(0)
 {
 }
 
-HWND MyButton::Create(HWND hWnd, HINSTANCE hInstance, LPCSTR name, int x, int y, int width, int height, int id)
+HWND MyButton::Create(HWND hWnd, HINSTANCE hInstance, LPCWSTR name, int x, int y, int width, int height, int id)
 {
 	m_ParentWnd = hWnd;
 	m_hInstance = hInstance;
@@ -17,5 +17,5 @@ HWND MyButton::Create(HWND hWnd, HINSTANCE hInstance, LPCSTR name, int x, int y,
 	m_id = id;
 	m_name = name;
 
-	return (m_Btn = CreateWindow("button", name, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x, y, width, height, m_ParentWnd, (HMENU)id, m_hInstance, NULL));
+	return (m_Btn = CreateWindow(L"button", name, WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, x, y, width, height, m_ParentWnd, (HMENU)id, m_hInstance, NULL));
 }

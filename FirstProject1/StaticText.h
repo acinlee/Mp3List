@@ -10,7 +10,7 @@ public:
 	HWND Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height);
 	
 	//path getter, setter
-	TCHAR* get_path();
+	WCHAR* get_path();
 	void set_path(TCHAR path);
 
 	//statictext 핸들 getter
@@ -27,6 +27,6 @@ private:
 	int m_height;
 
 	//폴더 경로
-	TCHAR m_path;
+	WCHAR m_path;
 };
 #endif // !staticTextFilePath

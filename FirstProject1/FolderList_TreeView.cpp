@@ -2,6 +2,7 @@
 #include "FolderList_TreeView.h"
 #include <CommCtrl.h>
 #include <sstream>
+#include "global.h"
 #pragma comment(lib, "comctl32.lib")
 
 TreeView_FolderList::TreeView_FolderList():m_ParentWnd(NULL), m_hTreeFolerList(NULL),
@@ -18,10 +19,10 @@ HWND TreeView_FolderList::Create(HWND hWnd, HINSTANCE hInstance, int x, int y, i
 	m_width = width;
 	m_height = height;
 
-	return (m_hTreeFolerList = CreateWindow(WC_TREEVIEW, "", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, x, y, width, height, hWnd, NULL, m_hInstance, NULL));
+	return (m_hTreeFolerList = CreateWindow(WC_TREEVIEW, L"", WS_CHILD | WS_VISIBLE | WS_BORDER | TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT, x, y, width, height, hWnd, NULL, m_hInstance, NULL));
 }
 
-void TreeView_FolderList::InsertRootFolder(TCHAR* path)
+void TreeView_FolderList::InsertRootFolder(WCHAR* path)
 {
 	TreeView_DeleteAllItems(m_hTreeFolerList);
 	m_TI.hParent = TVI_ROOT;
@@ -30,8 +31,8 @@ void TreeView_FolderList::InsertRootFolder(TCHAR* path)
 	m_TI.item.pszText = path;
 	m_HTREE = TreeView_InsertItem(m_hTreeFolerList, &m_TI);
 	
-	//todo : stringstream
-	std::stringstream nextpath;
+	//todo : wstringstream
+	std::wstringstream nextpath;
 	nextpath << path;
 	nextpath << "\\*.*";
 	nextpath >> path;
@@ -39,7 +40,7 @@ void TreeView_FolderList::InsertRootFolder(TCHAR* path)
 	InsertFolderList(path, m_HTREE);
 }
 
-void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM hParent)
+void TreeView_FolderList::InsertFolderList(WCHAR* path, HTREEITEM hParent)
 {
 	HANDLE hSrch;
 	WIN32_FIND_DATA wfd;
@@ -49,20 +50,22 @@ void TreeView_FolderList::InsertFolderList(TCHAR* path, HTREEITEM hParent)
 	TCHAR fname[_MAX_FNAME]; // 파일명
 	TCHAR ext[_MAX_EXT]; //확장자 명
 	TCHAR newpath[MAX_PATH];
-	std::stringstream nextpath;
+	std::wstringstream nextpath;
 
 	hSrch = FindFirstFile(path, &wfd);
 	if (hSrch == INVALID_HANDLE_VALUE)
 	{
 		return;
 	}
-	_splitpath_s(path, drive, dir, fname, ext);
+
+	_wsplitpath_s(path, drive, dir, fname, ext);
+
 	while (bResult)
 	{
 		//디렉토리인지 검사
 		if (wfd.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY)
 		{
-			if (lstrcmp(wfd.cFileName, ".") && lstrcmp(wfd.cFileName, ".."))
+			if (lstrcmp(wfd.cFileName, Global::toLPWSTR(const_cast<char*>("."))) && lstrcmp(wfd.cFileName, Global::toLPWSTR(const_cast<char*>(".."))))
 			{
 				nextpath << path;
 				nextpath << "\\*.*";

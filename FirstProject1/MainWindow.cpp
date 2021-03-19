@@ -42,9 +42,9 @@ MSG MainWindow::get_Message()
 LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
 	m_folderTree.Create(hWnd, Global::get_hInstance(), 10, 100, 400, 200);
-	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance(), "폴더 선택", 440, 20, 100, 25, SET_HOME_FOLDER_BTN);
+	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance(), L"폴더 선택", 440, 20, 100, 25, SET_HOME_FOLDER_BTN);
 	m_FilePath.Create(hWnd, Global::get_hInstance(), 10, 20, 400, 25);
-	m_filListView.Create(hWnd, Global::get_hInstance(), 410, 100, 420, 200);
+	m_filListView.Create(hWnd, Global::get_hInstance(), 410, 100, 600, 200);
 	return 0;
 }
 

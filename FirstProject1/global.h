@@ -2,6 +2,7 @@
 #ifndef global_hInstance
 #define global_hInstace
 #include <Windows.h>
+#include <cstdlib>
 
 //두가지 방법
 /*
@@ -15,6 +16,7 @@ public:
 	Global();
 	static void set_hInstance(HINSTANCE hInstance);
 	static HINSTANCE get_hInstance();
+	static LPWSTR toLPWSTR(const char * text);
 private:
 	static HINSTANCE g_hInstance;
 };
