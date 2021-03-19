@@ -13,6 +13,7 @@ m_WndClass({ 0, }), m_hWnd(NULL), m_iMessage(NULL), m_wParam(NULL), m_lParam(NUL
 
 void MainWindow::Create()
 {
+	setlocale(LC_ALL, "");
 	m_WndClass.cbClsExtra = 0;
 	m_WndClass.cbWndExtra = 0;
 	m_WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
