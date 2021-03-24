@@ -7,11 +7,11 @@ class StaticText
 {
 public:
 	StaticText();
-	HWND Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height);
+	void Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height);
 	
 	//path getter, setter
 	WCHAR* get_path();
-	void set_path(TCHAR path);
+	void set_path(WCHAR *path);
 
 	//statictext 핸들 getter
 	HWND get_statictext();
@@ -27,6 +27,6 @@ private:
 	int m_height;
 
 	//폴더 경로
-	WCHAR m_path;
+	WCHAR m_path[MAX_PATH] = {0,};
 };
 #endif // !staticTextFilePath
