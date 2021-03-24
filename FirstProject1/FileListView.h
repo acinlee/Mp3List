@@ -3,23 +3,26 @@
 #define FileListViewHeader
 #include <Windows.h>
 #include <CommCtrl.h>
+#include <vector>
 #pragma comment(lib, "comctl32.lib")
 
 class FileListView {
 public:
-	typedef struct
+	typedef struct 
 	{
 		char title[31];
 		char artist[31];
-		char album[31];
 		char year[5];
+		char album[31];
 	}SongInfo;
 
 public:
 	FileListView();
-	HWND Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height);
-	void FileListInsert(WCHAR* path);
-	//BOOL Mp3Info(WCHAR* filename, SongInfo* song);
+	void Create(HWND hWnd, HINSTANCE hInstance, int x, int y, int width, int height);
+	void SongStructInsert(WCHAR* path);
+	BOOL Mp3Info(WCHAR* filename, SongInfo* song);
+	HWND getListView();
+	BOOL FileListInsert();
 
 private:
 	HWND m_hParent;
@@ -36,6 +39,6 @@ private:
 	int m_width;
 	int m_height;
 
-
+	std::vector<SongInfo> songs;
 };
 #endif // !FileListViewHeader

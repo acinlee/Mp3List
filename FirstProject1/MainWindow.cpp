@@ -58,10 +58,11 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 		{
 			SetWindowText(m_FilePath.get_statictext(), m_FilePath.get_path());
 			m_folderTree.InsertRootFolder(m_FilePath.get_path());
-			m_filListView.FileListInsert(m_FilePath.get_path());
+			m_filListView.SongStructInsert(m_FilePath.get_path());
+			m_filListView.FileListInsert();
 		}
 		//Mp3InfoWnd_Instance.Create(m_hWnd, m_hInstance);
-		return 0;
+		return TRUE;
 	}
 	return 0;
 }
@@ -90,7 +91,8 @@ LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LP
 		return 0;
 	case WM_COMMAND:
 		main->OnCommand(hWnd, wParam, lParam);
-		return 0;
+		break;
+	case WM_PAINT:
 	case WM_NOTIFY:
 		main->OnNotify(hWnd, wParam, lParam);
 		break;
