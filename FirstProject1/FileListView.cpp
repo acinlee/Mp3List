@@ -3,8 +3,8 @@
 #include <fstream>
 #include <istream>
 #include <sstream>
-#include <cstdio>
-#include <vcruntime_string.h>
+//#include <cstdio>
+//#include <vcruntime_string.h>
 #include <CommCtrl.h>
 #include <comdef.h> 
 #pragma comment(lib, "comctl32.lib")
@@ -86,19 +86,22 @@ void FileListView::SongStructInsert(WCHAR* path)
 		}
 		else
 		{
+			//21.03.24 오류 같은 파일이 반복되는 오류 - 특정 파일에서 발생하는 오류로 Mp3Info 함수를 수정해야됨(idv1->idv2)
 			nextpath << drive;
 			nextpath << dir;
 			nextpath << wfd.cFileName;
 			lstrcpy(newpath, nextpath.str().c_str());
 			Mp3Info(newpath, &song);
-			
+
 			songs.push_back(song);
+			nextpath.str(L"");
 		}
 		bResult = FindNextFile(hSrch, &wfd);
 	}
 	FindClose(hSrch);
 }
 
+//여기도 c가 아닌 c++처럼 수정
 BOOL FileListView::Mp3Info(WCHAR* filename, SongInfo* song)
 {
 	FILE* fh;
@@ -144,8 +147,6 @@ BOOL FileListView::Mp3Info(WCHAR* filename, SongInfo* song)
 	return TRUE;
 }
 
-
-
 HWND FileListView::getListView()
 {
 	return m_FileListView;
@@ -164,6 +165,30 @@ BOOL FileListView::FileListInsert()
 		ListView_SetItemText(getListView(), idx, 1, Global::toLPWSTR(songs[i].artist));
 		ListView_SetItemText(getListView(), idx, 2, Global::toLPWSTR(songs[i].year));
 		ListView_SetItemText(getListView(), idx, 3, Global::toLPWSTR(songs[i].album));
+	}
+	return TRUE;
+}
+
+BOOL FileListView::SelectItem()
+{
+	int idx = ListView_GetNextItem(m_FileListView, -1, LVNI_ALL | LVNI_SELECTED);// 선택 항목
+	if (idx == -1)
+	{
+		return FALSE;
+	}
+	else
+	{
+		/*char dialogtitle[31] = { 0 };
+		char dialogartist[31] = { 0 };
+		char dialogyear[31] = { 0 };
+		char dialogalbum[31] = { 0 };
+		ListView_GetItemText(getListView(), idx, 0, Global::toLPWSTR(dialogtitle), 31);
+		ListView_GetItemText(getListView(), idx, 1, Global::toLPWSTR(dialogartist), 31);
+		ListView_GetItemText(getListView(), idx, 2, Global::toLPWSTR(dialogyear), 31);
+		ListView_GetItemText(getListView(), idx, 3, Global::toLPWSTR(dialogalbum), 31);
+		*///다이얼로그 박스 create할때 리스트뷰의 텍스트 값 같이 보내서 초기화 해야됨
+		m_mp3InfoWnd.Create(m_hParent, Global::get_hInstance());
+		//m_mp3InfoWnd.setText(dialogtitle, dialogartist, dialogyear, dialogalbum);
 	}
 	return TRUE;
 }
