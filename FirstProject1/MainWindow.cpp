@@ -46,6 +46,8 @@ LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance(), L"폴더 선택", 440, 20, 100, 25, SET_HOME_FOLDER_BTN);
 	m_FilePath.Create(hWnd, Global::get_hInstance(), 10, 20, 400, 25);
 	m_filListView.Create(hWnd, Global::get_hInstance(), 410, 100, 600, 200);
+	//listview 항목 선택시 생성되야됨
+	//m_mp3InfoWnd.Create(m_hWnd, Global::get_hInstance()); //음악 id3v1 tag 수정 dialog
 	return 0;
 }
 
@@ -61,14 +63,20 @@ LRESULT MainWindow::OnCommand(HWND hWnd, WPARAM wParam, LPARAM lParam)
 			m_filListView.SongStructInsert(m_FilePath.get_path());
 			m_filListView.FileListInsert();
 		}
-		//Mp3InfoWnd_Instance.Create(m_hWnd, m_hInstance);
 		return TRUE;
+
 	}
 	return 0;
 }
 
 LRESULT MainWindow::OnNotify(HWND hWnd, WPARAM wParam, LPARAM lParam)
 {
+	switch (((LPNMHDR)lParam)->code)
+	{
+	case NM_DBLCLK:
+		m_filListView.SelectItem();
+		break;
+	}
 	return 0;
 }
 
@@ -92,7 +100,6 @@ LRESULT CALLBACK MainWindow::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LP
 	case WM_COMMAND:
 		main->OnCommand(hWnd, wParam, lParam);
 		break;
-	case WM_PAINT:
 	case WM_NOTIFY:
 		main->OnNotify(hWnd, wParam, lParam);
 		break;
@@ -129,7 +136,7 @@ BOOL MainWindow::BrowseFolder(HWND hParent, LPCTSTR szTitle, LPCSTR StartPath, T
 	bi.pszDisplayName = NULL;
 	bi.lpszTitle = szTitle;
 	bi.ulFlags = 0;
-	bi.lpfn = BrowseCallbackProc;;
+	bi.lpfn = BrowseCallbackProc;
 	bi.lParam = (LPARAM)StartPath;
 
 	pidl = SHBrowseForFolder(&bi);

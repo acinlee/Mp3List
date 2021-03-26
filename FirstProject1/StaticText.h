@@ -27,6 +27,7 @@ private:
 	int m_height;
 
 	//폴더 경로
+	//path에 그냥 문자열을 넣어서 오류가 생겼었음...
 	WCHAR m_path[MAX_PATH] = {0,};
 };
 #endif // !staticTextFilePath

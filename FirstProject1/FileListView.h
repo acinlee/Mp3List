@@ -4,6 +4,7 @@
 #include <Windows.h>
 #include <CommCtrl.h>
 #include <vector>
+#include "Mp3InfoWnd.h"
 #pragma comment(lib, "comctl32.lib")
 
 class FileListView {
@@ -23,6 +24,7 @@ public:
 	BOOL Mp3Info(WCHAR* filename, SongInfo* song);
 	HWND getListView();
 	BOOL FileListInsert();
+	BOOL SelectItem();//선택 항목 가져오기
 
 private:
 	HWND m_hParent;
@@ -40,5 +42,7 @@ private:
 	int m_height;
 
 	std::vector<SongInfo> songs;
+
+	Mp3InfoWnd m_mp3InfoWnd;
 };
 #endif // !FileListViewHeader

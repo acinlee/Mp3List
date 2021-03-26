@@ -5,7 +5,6 @@
 #include "FolderList_TreeView.h"
 #include "FolderRegisterBtn.h"
 #include "FileListView.h"
-#include "Mp3InfoWnd.h"
 #include "StaticText.h"
 #include "resource.h"
 #include <locale.h>
@@ -47,8 +46,7 @@ private:
 	MyButton m_setHomeFolderButton;
 	StaticText m_FilePath;
 	FileListView m_filListView;
-	
-	Mp3InfoWnd m_mp3InfoWnd;
+
 };
 
 
