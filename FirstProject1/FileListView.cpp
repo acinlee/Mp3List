@@ -3,6 +3,8 @@
 #include <fstream>
 #include <istream>
 #include <sstream>
+#include <codecvt>
+#include "resource.h"
 //#include <cstdio>
 //#include <vcruntime_string.h>
 #include <CommCtrl.h>
@@ -178,17 +180,9 @@ BOOL FileListView::SelectItem()
 	}
 	else
 	{
-		/*char dialogtitle[31] = { 0 };
-		char dialogartist[31] = { 0 };
-		char dialogyear[31] = { 0 };
-		char dialogalbum[31] = { 0 };
-		ListView_GetItemText(getListView(), idx, 0, Global::toLPWSTR(dialogtitle), 31);
-		ListView_GetItemText(getListView(), idx, 1, Global::toLPWSTR(dialogartist), 31);
-		ListView_GetItemText(getListView(), idx, 2, Global::toLPWSTR(dialogyear), 31);
-		ListView_GetItemText(getListView(), idx, 3, Global::toLPWSTR(dialogalbum), 31);
-		*///다이얼로그 박스 create할때 리스트뷰의 텍스트 값 같이 보내서 초기화 해야됨
-		m_mp3InfoWnd.Create(m_hParent, Global::get_hInstance());
-		//m_mp3InfoWnd.setText(dialogtitle, dialogartist, dialogyear, dialogalbum);
+		auto mp3 = new Mp3InfoWnd(Global::toLPWSTR(songs[idx].title), Global::toLPWSTR(songs[idx].artist), Global::toLPWSTR(songs[idx].year), Global::toLPWSTR(songs[idx].album));
+		mp3->Create(m_hParent, Global::get_hInstance());
+
 	}
 	return TRUE;
 }

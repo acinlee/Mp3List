@@ -42,7 +42,5 @@ private:
 	int m_height;
 
 	std::vector<SongInfo> songs;
-
-	Mp3InfoWnd m_mp3InfoWnd;
 };
 #endif // !FileListViewHeader
