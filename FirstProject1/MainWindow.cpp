@@ -46,8 +46,6 @@ LRESULT MainWindow::OnCreate(HWND hWnd, WPARAM wParam, LPARAM lParam)
 	m_setHomeFolderButton.Create(hWnd, Global::get_hInstance(), L"폴더 선택", 440, 20, 100, 25, SET_HOME_FOLDER_BTN);
 	m_FilePath.Create(hWnd, Global::get_hInstance(), 10, 20, 400, 25);
 	m_filListView.Create(hWnd, Global::get_hInstance(), 410, 100, 600, 200);
-	//listview 항목 선택시 생성되야됨
-	//m_mp3InfoWnd.Create(m_hWnd, Global::get_hInstance()); //음악 id3v1 tag 수정 dialog
 	return 0;
 }
 
